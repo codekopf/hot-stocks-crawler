@@ -1,4 +1,4 @@
-# HotStocks Scrapper
+# Hot Stocks Crawler
 
 This scrapper does not scrap any information from the website. It scraps only visual graph from the FinViz website.
 

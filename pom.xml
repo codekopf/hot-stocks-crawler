@@ -81,7 +81,7 @@
                     <!-- MainClass in manifest make a executable jar -->
                     <archive>
                         <manifest>
-                            <mainClass>com.codekopf.hotstocks.HotStocksApplication</mainClass>
+                            <mainClass>com.codekopf.hotstocks.HotStocksCrawler</mainClass>
                         </manifest>
                     </archive>
 

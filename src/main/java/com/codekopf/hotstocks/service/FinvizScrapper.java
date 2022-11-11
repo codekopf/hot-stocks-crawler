@@ -17,7 +17,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.codekopf.hotstocks.HotStocksApplication;
+import com.codekopf.hotstocks.HotStocksCrawler;
 import com.codekopf.hotstocks.model.StockTitle;
 
 public class FinvizScrapper {
@@ -122,7 +122,7 @@ public class FinvizScrapper {
     }
 
     private File createNewStockImageGraphFile(String stockTicker, String graphImageSuffix) {
-        return new File(HotStocksApplication.DOWNLOAD_FILE_PATH + scrappingDate + "\\img\\" + stockTicker + graphImageSuffix + ".png");
+        return new File(HotStocksCrawler.DOWNLOAD_FILE_PATH + scrappingDate + "\\img\\" + stockTicker + graphImageSuffix + ".png");
     }
 
     protected BufferedImage captureSubImage(BufferedImage fullImg, Point point, int scrollPosition, int elementWidth, int elementHeight) {

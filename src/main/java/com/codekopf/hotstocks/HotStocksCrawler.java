@@ -16,7 +16,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.io.FileUtils;
 
-public class HotStocksApplication {
+public class HotStocksCrawler {
 
     public static final String DOWNLOAD_FILE_PATH = "C:\\hotstocks\\";
 
@@ -42,7 +42,7 @@ public class HotStocksApplication {
         // Init WebDriver
         System.setProperty("webdriver.gecko.driver", "C:\\drivers\\geckodriver\\geckodriver.exe");
 
-        File csvFile = new File("C:\\DEV\\hot-stocks\\src\\main\\resources\\own.csv");
+        File csvFile = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\own.csv");
 
         String fileContent = FileUtils.readFileToString(csvFile);
 
@@ -79,7 +79,7 @@ public class HotStocksApplication {
         // Orsted
 
 
-        csvFile = new File("C:\\DEV\\hot-stocks\\src\\main\\resources\\speculative.csv");
+        csvFile = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv");
 
         fileContent = FileUtils.readFileToString(csvFile);
 
