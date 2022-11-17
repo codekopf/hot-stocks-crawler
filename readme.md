@@ -13,7 +13,7 @@ On Windows, you must place `geckodriver.exe` file located in `resource\geckodriv
 ### IntelliJ IDEA
 If you import this project to IntelliJ IDE, use `New > Project from Version Control`. This is Maven project and import helps you to set up project faster.
 
-## TODO
+## TODO - Crawler
 + draw a high level graph of scrapper architecture
 + Add a logo to every stock? 
   + Logo source https://s3-symbol-logo.tradingview.com/amc-entertainment-holdings--big.svg
@@ -25,3 +25,8 @@ If you import this project to IntelliJ IDE, use `New > Project from Version Cont
 + Add image of how it looks like
 + Finish adding icons to stock titles
 + Add alphabetical list of stock tickers as links to individual company graphs on the top
++ Use AJAX to sort by cheapest stock at current day
++ Past ownership - I do not own X anymore
+
+## TODO - Stocks
++ Check https://finviz.com/screener.ashx?v=111&f=ind_reitspecialty REIT section for interesting
