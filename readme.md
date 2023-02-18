@@ -36,7 +36,6 @@ If you import this project to IntelliJ IDE, use `New > Project from Version Cont
   + Moneta Money Bank as
   + RWE AG - https://www.boersen-zeitung.de/aktie/kurse/RWE-AG-DE0007037129
   + Schibsted ASA
-  + Stock Spirits Group PLC
   + Thyssenkrupp AG - ??????????????????
   + Volkswagen AG - https://www.boersen-zeitung.de/aktie/kurse/Volkswagen-AG-DE0007664039
   + Orsted
