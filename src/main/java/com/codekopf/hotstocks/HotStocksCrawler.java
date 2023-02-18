@@ -47,7 +47,7 @@ public class HotStocksCrawler {
         // Init WebDriver
         System.setProperty("webdriver.gecko.driver", "C:\\drivers\\geckodriver\\geckodriver.exe");
 
-        val csvFileForOwnedStocks = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\own.csv");
+        val csvFileForOwnedStocks = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\owned.csv");
 
         val fileContentOfOwnedStocks = FileUtils.readFileToString(csvFileForOwnedStocks);
 
