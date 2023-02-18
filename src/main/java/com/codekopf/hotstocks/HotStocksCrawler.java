@@ -64,19 +64,7 @@ public class HotStocksCrawler {
             // TODO abuday - empty catch block
         }
 
-        // TODO abuday - fix this - owned by me
-        // Airbus
-        // CEZ a.s.
-        // Deutsche Lufthansa AG - https://www.boersen-zeitung.de/aktie/kurse/Deutsche-Lufthansa-AG-DE0008232125
-        // Erste Group Bank AG - https://www.google.com/finance/quote/EBS:VIE?sa=X&window=5Y ; https://www.boersen-zeitung.de/unternehmen/kurse/AT0000652011
-        // Kofola CeskoSlovensko as
-        // Moneta Money Bank as
-        // RWE AG - https://www.boersen-zeitung.de/aktie/kurse/RWE-AG-DE0007037129
-        // Schibsted ASA
-        // Stock Spirits Group PLC
-        // Thyssenkrupp AG - ??????????????????
-        // Volkswagen AG - https://www.boersen-zeitung.de/aktie/kurse/Volkswagen-AG-DE0007664039
-        // Orsted
+        val ownedStocks = parseStocks(fileContentOfOwnedStocks);
 
 
         csvFile = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv");

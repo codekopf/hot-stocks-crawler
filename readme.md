@@ -27,6 +27,24 @@ If you import this project to IntelliJ IDE, use `New > Project from Version Cont
 + Add alphabetical list of stock tickers as links to individual company graphs on the top
 + Use AJAX to sort by cheapest stock at current day
 + Past ownership - I do not own X anymore
++ List of companies by me which can not be scrapped by info at FINVIZ:
+  + Airbus
+  + CEZ a.s.
+  + Deutsche Lufthansa AG - https://www.boersen-zeitung.de/aktie/kurse/Deutsche-Lufthansa-AG-DE0008232125
+  + Erste Group Bank AG - https://www.google.com/finance/quote/EBS:VIE?sa=X&window=5Y ; https://www.boersen-zeitung.de/unternehmen/kurse/AT0000652011
+  + Kofola CeskoSlovensko as
+  + Moneta Money Bank as
+  + RWE AG - https://www.boersen-zeitung.de/aktie/kurse/RWE-AG-DE0007037129
+  + Schibsted ASA
+  + Stock Spirits Group PLC
+  + Thyssenkrupp AG - ??????????????????
+  + Volkswagen AG - https://www.boersen-zeitung.de/aktie/kurse/Volkswagen-AG-DE0007664039
+  + Orsted
++ FINVIZ does not show all the stocks I have
+  + B4B; 
+  + Metro AG; 
+  + Siemens Gamesa Renewable Energy SA - not at FINVIZ
+  + Nestlé S.A.; - Swiss company, not at FINVIZ;
 
 ## TODO - Stocks
 + Check https://finviz.com/screener.ashx?v=111&f=ind_reitspecialty REIT section for interesting
