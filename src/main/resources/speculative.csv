@@ -32,4 +32,8 @@ FINVIZ  ; DLR   ; Digital Realty Trust, Inc.      ;                             
 FINVIZ  ; AMT   ; American Tower Corporation      ; https://s3-symbol-logo.tradingview.com/american-tower--big.svg         ; REIT - Telecom ;
 FINVIZ  ; WPC   ; W. P. Carey Inc.                ; https://s3-symbol-logo.tradingview.com/w-p-carey--big.svg              ; REIT ;
 FINVIZ  ; VNQ   ; Vanguard Real Estate Index Fund ; https://s3-symbol-logo.tradingview.com/vanguard--big.svg               ; REIT - INDEX ;
+FINVIZ  ; MA    ; Mastercard Incorporated         ; https://s3-symbol-logo.tradingview.com/mastercard--big.svg             ;      ;
+FINVIZ  ; V     ; Visa Inc.                       ; https://s3-symbol-logo.tradingview.com/visa--big.svg                   ;      ;
+FINVIZ  ; MCO   ; Moody's Corporation             ; https://s3-symbol-logo.tradingview.com/moodys--big.svg                 ;      ;
+FINVIZ  ; SPGI  ; S&P Global Inc.                 ; https://s3-symbol-logo.tradingview.com/s-and-p-global--big.svg         ;      ;
 
