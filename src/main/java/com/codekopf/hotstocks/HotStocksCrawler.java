@@ -3,7 +3,7 @@ package com.codekopf.hotstocks;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +12,7 @@ import com.codekopf.hotstocks.file.Template;
 import com.codekopf.hotstocks.model.CrawlingSource;
 import com.codekopf.hotstocks.model.StockTitle;
 import com.codekopf.hotstocks.service.FinvizScrapper;
+import lombok.val;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.io.FileUtils;
@@ -42,58 +43,20 @@ public class HotStocksCrawler {
         // Init WebDriver
         System.setProperty("webdriver.gecko.driver", "C:\\drivers\\geckodriver\\geckodriver.exe");
 
-        File csvFile = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\own.csv");
+        val csvFileForOwnedStocks = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\own.csv");
 
-        String fileContent = FileUtils.readFileToString(csvFile);
-
-        List<StockTitle> ownedStocks = new ArrayList<>();
-        try (CSVParser csvParser = new CSVParser(new StringReader(fileContent), CSVFormat.DEFAULT.withDelimiter(SEMICOLON).withHeader(HEADER).withSkipHeaderRecord())) {
-            ownedStocks = csvParser
-                    .getRecords()
-                    .stream()
-                    .map(csvRecord -> StockTitle.of(
-                            CrawlingSource.valueOf(csvRecord.get(SCRAPER).trim()),
-                            csvRecord.get(TICKER).trim(),
-                            csvRecord.get(NAME).trim(),
-                            csvRecord.get(IMAGE).trim()
-                            )
-                    )
-                    .sorted(Comparator.comparing(StockTitle::getName))
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
-            // TODO abuday - empty catch block
-        }
+        val fileContentOfOwnedStocks = FileUtils.readFileToString(csvFileForOwnedStocks);
 
         val ownedStocks = parseStocks(fileContentOfOwnedStocks);
 
+        val csvFileForSpeculativeStocks = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv");
 
-        csvFile = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv");
+        val fileContentForSpeculativeStocks = FileUtils.readFileToString(csvFileForSpeculativeStocks);
 
-        fileContent = FileUtils.readFileToString(csvFile);
+        val speculativeStocks = parseStocks(fileContentForSpeculativeStocks);
 
-        List<StockTitle> speculativeStocks = new ArrayList<>();
-        try (CSVParser csvParser = new CSVParser(new StringReader(fileContent), CSVFormat.DEFAULT.withDelimiter(SEMICOLON).withHeader(HEADER).withSkipHeaderRecord())) {
-            speculativeStocks = csvParser
-                    .getRecords()
-                    .stream()
-                    .map(csvRecord -> StockTitle.of(
-                            CrawlingSource.valueOf(csvRecord.get(SCRAPER).trim()),
-                            csvRecord.get(TICKER).trim(),
-                            csvRecord.get(NAME).trim(),
-                            csvRecord.get(IMAGE).trim()
-                            )
-                    )
-                    .sorted(Comparator.comparing(StockTitle::getName))
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
-            // TODO abuday - empty catch block
-        }
-        // TODO if empty than wrong
-
-        // TODO
-        // FINVIZ; B4B; Metro AG; TODO abuday - fails to load;
-        //// Siemens Gamesa Renewable Energy SA - not at FINVIZ
-        //FINVIZ; ; Nestlé S.A.; TODO abuday - Swiss company, not at FINVIZ;
+        // TODO abuday - What if ownedStocks or speculativeStocks should be empty list or throw exception
+        //  How to handle exception? What to do if there is empty list?
 
         StringBuilder content = new StringBuilder();
 
