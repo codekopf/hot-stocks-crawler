@@ -105,25 +105,14 @@ public class HotStocksCrawler {
 
         content.append("<h2>Owned stocks!</h2>");
         for (StockTitle ownedStock : ownedStocks) {
-            content.append("<img src=\"").append(ownedStock.getImage()).append("\">").append(ownedStock.getName()).append("<br>");
-            content.append("<img src=\"img").append("\\").append(ownedStock.getTicker()).append("-d.png").append("\">");
-            content.append("<br><br>");
-            content.append("<img src=\"img").append("\\").append(ownedStock.getTicker()).append("-w.png").append("\">");
-            content.append("<br><br>");
-            content.append("<img src=\"img").append("\\").append(ownedStock.getTicker()).append("-m.png").append("\">");
-            content.append("<br><br>");
-        }
+            addStockTitleToContent(content, ownedStock);
+        };
 
         content.append("<h2>Speculative stocks!</h2>");
         for (StockTitle speculativeStock : speculativeStocks) {
-            content.append("<img src=\"").append(speculativeStock.getImage()).append("\">").append(speculativeStock.getName()).append("<br>");
-            content.append("<img src=\"img").append("\\").append(speculativeStock.getTicker()).append("-d.png").append("\">");
-            content.append("<br><br>");
-            content.append("<img src=\"img").append("\\").append(speculativeStock.getTicker()).append("-w.png").append("\">");
-            content.append("<br><br>");
-            content.append("<img src=\"img").append("\\").append(speculativeStock.getTicker()).append("-m.png").append("\">");
-            content.append("<br><br>");
-        }
+            addStockTitleToContent(content, speculativeStock);
+        };
+
         content.append("</div>");
 
         // Daily
@@ -252,6 +241,36 @@ public class HotStocksCrawler {
         FinvizScrapper finvizScrapper = new FinvizScrapper(scrappingDate);
         finvizScrapper.crawl(ownedStocks);
         finvizScrapper.crawl(speculativeStocks);
+    }
+
+    private static List<StockTitle> parseStocks(String fileContent) {
+        try (CSVParser csvParser = new CSVParser(new StringReader(fileContent), CSVFormat.DEFAULT.withDelimiter(SEMICOLON).withHeader(HEADER).withSkipHeaderRecord())) {
+            return csvParser.getRecords()
+                    .stream()
+                    .map(csvRecord -> StockTitle.of(
+                            CrawlingSource.valueOf(csvRecord.get(SCRAPER).trim()),
+                            csvRecord.get(TICKER).trim(),
+                            csvRecord.get(NAME).trim(),
+                            csvRecord.get(IMAGE).trim()
+                            )
+                    )
+                    .sorted(Comparator.comparing(StockTitle::getName))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            // TODO abuday - empty catch block
+        }
+        return Collections.emptyList();
+    }
+
+    private static void addStockTitleToContent(StringBuilder content, StockTitle stockTitle) {
+        content.append("<img src=\"").append(stockTitle.getImage()).append("\">").append(stockTitle.getName());
+        content.append("<br>");
+        content.append("<img src=\"img").append("\\").append(stockTitle.getTicker()).append("-d.png").append("\">");
+        content.append("<br><br>");
+        content.append("<img src=\"img").append("\\").append(stockTitle.getTicker()).append("-w.png").append("\">");
+        content.append("<br><br>");
+        content.append("<img src=\"img").append("\\").append(stockTitle.getTicker()).append("-m.png").append("\">");
+        content.append("<br><br>");
     }
 
 }
