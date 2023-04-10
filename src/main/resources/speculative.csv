@@ -36,4 +36,25 @@ FINVIZ  ; MA    ; Mastercard Incorporated         ; https://s3-symbol-logo.tradi
 FINVIZ  ; V     ; Visa Inc.                       ; https://s3-symbol-logo.tradingview.com/visa--big.svg                   ;      ;
 FINVIZ  ; MCO   ; Moody's Corporation             ; https://s3-symbol-logo.tradingview.com/moodys--big.svg                 ;      ;
 FINVIZ  ; SPGI  ; S&P Global Inc.                 ; https://s3-symbol-logo.tradingview.com/s-and-p-global--big.svg         ;      ;
-
+FINVIZ  ; COF   ; Capital One Financial Corp.     ; https://s3-symbol-logo.tradingview.com/capital-one--big.svg            ; bank ;
+FINVIZ  ; UBS   ; UBS Group AG Registered         ; https://s3-symbol-logo.tradingview.com/ubs-group--big.svg              ; bank ;
+FINVIZ  ; MS    ; Morgan Stanley                  ; https://s3-symbol-logo.tradingview.com/morgan-stanley--big.svg         ; bank ;
+FINVIZ  ; SCHW  ; Charles Schwab Corporation      ; https://s3-symbol-logo.tradingview.com/schwab--big.svg                 ; bank ;
+FINVIZ  ; BK    ; Bank of New York Mellon Corp    ; https://s3-symbol-logo.tradingview.com/bank-of-new-york-mellon--big.svg; bank ;
+FINVIZ  ; DB    ; Deutsche Bank AG                ; https://s3-symbol-logo.tradingview.com/deutsche-bank-ag--big.svg       ; bank ;
+FINVIZ  ; TFC   ; Truist Financial Corp           ; https://s3-symbol-logo.tradingview.com/truist-financial--big.svg       ; bank ;
+FINVIZ  ; USB   ; U.S. Bancorp                    ; https://s3-symbol-logo.tradingview.com/us-bancorp--big.svg             ; bank ;
+FINVIZ  ; JPM   ; JPMorgan Chase & Co.            ; https://s3-symbol-logo.tradingview.com/jpmorgan-chase--big.svg         ; bank ;
+FINVIZ  ; BSC   ; Barclays PLC                    ; https://s3-symbol-logo.tradingview.com/barclays--big.svg               ; bank ;
+FINVIZ  ; HSBC  ; HSBC Holdings plc               ; https://s3-symbol-logo.tradingview.com/hsbc--big.svg                   ; bank - good buy for bank crisis ;
+FINVIZ  ; LYG   ; Lloyds Banking Group plc        ; https://s3-symbol-logo.tradingview.com/lloyds--big.svg                 ; bank ;
+FINVIZ  ; HDB   ; HDFC Bank Limited               ; https://s3-symbol-logo.tradingview.com/hdfc-bank--big.svg              ; bank ;
+FINVIZ  ; C     ; Citigroup Inc                   ; https://s3-symbol-logo.tradingview.com/citigroup--big.svg              ; bank ;
+FINVIZ  ; STT   ; State Street Corp               ; https://s3-symbol-logo.tradingview.com/state-street--big.svg           ; bank ;
+FINVIZ  ; PNC   ; PNC Financial Services Group Inc; https://s3-symbol-logo.tradingview.com/pnc-financial--big.svg          ; bank ;
+FINVIZ  ; CMA   ; Comerica Incorporate            ; https://s3-symbol-logo.tradingview.com/comerica--big.svg               ; bank ;
+FINVIZ  ; PACW  ; PacWest Bancorp                 ; https://s3-symbol-logo.tradingview.com/pacwest-bancorp--big.svg        ; bank ;
+FINVIZ  ; BMO   ; Bank Of Montreal                ; https://s3-symbol-logo.tradingview.com/bank-of-montreal--big.svg       ; bank ;
+FINVIZ  ; GS    ; Goldman Sachs Group Inc         ; https://s3-symbol-logo.tradingview.com/golden-sachs-etf-trust-goldman--big.svg   ; bank ;
+FINVIZ  ; FRC   ; First Republic Bank             ; https://s3-symbol-logo.tradingview.com/first-republic-bank-san-francisco--big.svg; bank ;
+FINVIZ  ; WAL   ; Western Alliance Bancorporation ; https://s3-symbol-logo.tradingview.com/western-alliance-bancorp--big.svg         ; bank ;
