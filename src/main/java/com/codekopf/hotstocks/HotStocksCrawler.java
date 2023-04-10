@@ -29,15 +29,21 @@ public class HotStocksCrawler {
     private static final String SCRAPER = "SCRAPER";
     private static final String TICKER = "TICKER";
     private static final String NAME = "NAME";
-    private static final String NOTE = "NOTE";
     private static final String IMAGE = "IMAGE";
+    private static final String NOTE = "NOTE";
     private static final String[] HEADER = {
-            "SCRAPER",
-            "TICKER",
-            "NAME",
-            "IMAGE",
-            "NOTE"
+            SCRAPER,
+            TICKER,
+            NAME,
+            IMAGE,
+            NOTE
     };
+
+    private static final String HTML_BR = "<br>";
+    private static final String DIV_END = "</div>";
+    private static final String H2_TITLE_OWNED_STOCKS ="<h2>Owned stocks!</h2>";
+    private static final String IMG_START_WITH_SOURCE = "<img src=\"img";
+
 
     public static void main(String[] args) throws IOException { // TODO abuday - main function should not throw IOException - redesign the scrapper so it does not  fail and kill the whole application
 
@@ -70,7 +76,7 @@ public class HotStocksCrawler {
 
         content.append("<h1>All Stocks!</h1>");
 
-        content.append("<h2>Owned stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
         for (StockTitle ownedStock : ownedStocks) {
             addStockTitleToContent(content, ownedStock);
         };
@@ -80,70 +86,70 @@ public class HotStocksCrawler {
             addStockTitleToContent(content, speculativeStock);
         };
 
-        content.append("</div>");
+        content.append(DIV_END);
 
         // Daily
         content.append("<div class=\"tab-pane fade\" id=\"nav-daily\" role=\"tabpanel\" aria-labelledby=\"nav-daily-tab\">");
 
         content.append("<h1>Daily</h1>");
-        content.append("<h2>Owned stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
 
         for (StockTitle ownedStock : ownedStocks) {
-            content.append("<img src=\"img").append("\\").append(ownedStock.getTicker()).append("-d.png").append("\">");
-            content.append("<br><br>");
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(ownedStock.getTicker()).append("-d.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
 
         for (StockTitle speculativeStock : speculativeStocks) {
-            content.append("<img src=\"img").append("\\").append(speculativeStock.getTicker()).append("-d.png").append("\">");
-            content.append("<br><br>");
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculativeStock.getTicker()).append("-d.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
         }
 
-        content.append("</div>");
+        content.append(DIV_END);
 
         // Weekly
         content.append("<div class=\"tab-pane fade\" id=\"nav-weekly\" role=\"tabpanel\" aria-labelledby=\"nav-weekly-tab\">");
 
         content.append("<h1>Weekly</h1>");
-        content.append("<h2>Owned stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
 
         for (StockTitle ownedStock : ownedStocks) {
-            content.append("<img src=\"img").append("\\").append(ownedStock.getTicker()).append("-w.png").append("\">");
-            content.append("<br><br>");
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(ownedStock.getTicker()).append("-w.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
 
         for (StockTitle speculativeStock : speculativeStocks) {
-            content.append("<img src=\"img").append("\\").append(speculativeStock.getTicker()).append("-w.png").append("\">");
-            content.append("<br><br>");
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculativeStock.getTicker()).append("-w.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
         }
 
-        content.append("</div>");
+        content.append(DIV_END);
 
         // Monthly
         content.append("<div class=\"tab-pane fade\" id=\"nav-monthly\" role=\"tabpanel\" aria-labelledby=\"nav-monthly-tab\">");
 
         content.append("<h1>Monthly</h1>");
-        content.append("<h2>Owned stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
 
         for (StockTitle ownedStock : ownedStocks) {
-            content.append("<img src=\"img").append("\\").append(ownedStock.getTicker()).append("-m.png").append("\">");
-            content.append("<br><br>");
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(ownedStock.getTicker()).append("-m.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
 
         for (StockTitle speculativeStock : speculativeStocks) {
-            content.append("<img src=\"img").append("\\").append(speculativeStock.getTicker()).append("-m.png").append("\">");
-            content.append("<br><br>");
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculativeStock.getTicker()).append("-m.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
         }
 
-        content.append("</div>");
+        content.append(DIV_END);
 
         // Tab ends
-        content.append("</div>");
+        content.append(DIV_END);
 
         File file = new File(DOWNLOAD_FILE_PATH + scrappingDate);
         file.mkdirs(); // TODO abuday - do not ignore this
@@ -231,13 +237,13 @@ public class HotStocksCrawler {
 
     private static void addStockTitleToContent(StringBuilder content, StockTitle stockTitle) {
         content.append("<img src=\"").append(stockTitle.getImage()).append("\">").append(stockTitle.getName());
-        content.append("<br>");
-        content.append("<img src=\"img").append("\\").append(stockTitle.getTicker()).append("-d.png").append("\">");
-        content.append("<br><br>");
-        content.append("<img src=\"img").append("\\").append(stockTitle.getTicker()).append("-w.png").append("\">");
-        content.append("<br><br>");
-        content.append("<img src=\"img").append("\\").append(stockTitle.getTicker()).append("-m.png").append("\">");
-        content.append("<br><br>");
+        content.append(HTML_BR);
+        content.append(IMG_START_WITH_SOURCE).append("\\").append(stockTitle.getTicker()).append("-d.png").append("\">");
+        content.append(HTML_BR).append(HTML_BR);
+        content.append(IMG_START_WITH_SOURCE).append("\\").append(stockTitle.getTicker()).append("-w.png").append("\">");
+        content.append(HTML_BR).append(HTML_BR);
+        content.append(IMG_START_WITH_SOURCE).append("\\").append(stockTitle.getTicker()).append("-m.png").append("\">");
+        content.append(HTML_BR).append(HTML_BR);
     }
 
 }

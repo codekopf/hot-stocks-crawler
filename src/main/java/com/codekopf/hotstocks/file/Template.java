@@ -2,6 +2,8 @@ package com.codekopf.hotstocks.file;
 
 public class Template {
 
+    private static final String DIV_END = "</div>";
+
     StringBuilder html;
     String content;
     String date;
@@ -58,7 +60,7 @@ public class Template {
         this.html.append("<li><a href=\"#\" class=\"nav-link px-2 link-dark\">Dividend Aristocrat</a></li>");
         this.html.append("</ul>");
         this.html.append("</header>");
-        this.html.append("</div>");
+        this.html.append(DIV_END);
 
         this.html.append("<div class=\"container\">");
         this.html.append("<nav>");
@@ -67,9 +69,9 @@ public class Template {
         this.html.append("<button class=\"nav-link\" id=\"nav-daily-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-daily\" type=\"button\" role=\"tab\" aria-controls=\"nav-daily\" aria-selected=\"false\">Daily</button>");
         this.html.append("<button class=\"nav-link\" id=\"nav-weekly-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-weekly\" type=\"button\" role=\"tab\" aria-controls=\"nav-weekly\" aria-selected=\"false\">Weekly</button>");
         this.html.append("<button class=\"nav-link\" id=\"nav-weekly-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-monthly\" type=\"button\" role=\"tab\" aria-controls=\"nav-monthly\" aria-selected=\"false\">Monthly</button>");
-        this.html.append("</div>");
+        this.html.append(DIV_END);
         this.html.append("</nav>");
-        this.html.append("</div>");
+        this.html.append(DIV_END);
     }
 
     private void createBODY() {
