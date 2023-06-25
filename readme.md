@@ -6,7 +6,9 @@ The aim of this scrapper is to provide quick overview on situation of the stocks
 
 ## Installation
 
-On Windows, you must place `geckodriver.exe` file located in `resource\geckodriver` folder into the `C:\drivers\geckodriver\geckodriver.exe` folder. Run the main method in `HotStocksApplication.java` and hope for the best.
+On Windows, you must place `geckodriver.exe` file located in `resource\geckodriver` folder into the `C:\drivers\geckodriver\geckodriver.exe` folder. Run the main method in `HotStocksCrawler.java` and hope for the best.
+
+Installed Firefox browser is also required.
 
 ## Importing project to IDE
 
@@ -44,6 +46,12 @@ If you import this project to IntelliJ IDE, use `New > Project from Version Cont
   + Metro AG; 
   + Siemens Gamesa Renewable Energy SA - not at FINVIZ
   + Nestlé S.A.; - Swiss company, not at FINVIZ;
++ Generate report of what can be purchased right now - which stocks are below their 60/200 averages
++ Add icons and names into their daily, weekly and monthly sites
++ Add links on the names to finviz.com pages of individual stocks
++ Pure Storage bought and sold
++ owned in past USX
++ Which consumer industry etc.
 
 ## TODO - Stocks
 + Check https://finviz.com/screener.ashx?v=111&f=ind_reitspecialty REIT section for interesting
