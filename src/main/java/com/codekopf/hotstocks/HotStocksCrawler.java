@@ -79,12 +79,12 @@ public class HotStocksCrawler {
         content.append(H2_TITLE_OWNED_STOCKS);
         for (StockTitle ownedStock : ownedStocks) {
             addStockTitleToContent(content, ownedStock);
-        };
+        }
 
         content.append("<h2>Speculative stocks!</h2>");
         for (StockTitle speculativeStock : speculativeStocks) {
             addStockTitleToContent(content, speculativeStock);
-        };
+        }
 
         content.append(DIV_END);
 
@@ -157,7 +157,7 @@ public class HotStocksCrawler {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 
         Template html = new Template(scrappingDate);
-        html.setContent(content.toString());
+        html.addContent(content.toString());
         bufferedWriter.write(html.build());
         bufferedWriter.close();
 

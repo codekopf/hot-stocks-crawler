@@ -71,37 +71,29 @@ public class FinvizScrapper {
 
     private void getGraph(FirefoxDriver driver, WebDriverWait wait, String stockTicker, GraphType graphType) throws IOException { // TODO replace FirefoxDrive to interface
 
-        List<WebElement> webElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("interactive-chart")));
-        // TODO abuday - clean this
-
-        //            driver.executeScript("return arguments[0].remove();", eles);
-//            JavascriptExecutor js;
-//            if (driver instanceof JavascriptExecutor) {
-//                js = (JavascriptExecutor) driver;
-//            }
-//            js.executeScript("return document.getElementsByClassName('ConsentManager__Overlay-np32r2-0')[0].remove();"); // ConsentManager__Overlay-np32r2-0 dibSJp <-- This can change aand
+        var webElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("interactive-chart")));
 
         if (webElements.isEmpty()) {
             return;
         }
-        WebElement webElement = webElements.get(0);
+        var webElement = webElements.get(0);
         // Long scrollYPos = (Long) driver.executeScript("arguments[0].scrollIntoView(true); return window.scrollY;", webElement);
         letThreadSleep(500);
 
-        File screenshot = driver.getScreenshotAs(OutputType.FILE);
-        BufferedImage fullImg = ImageIO.read(screenshot);
+        var screenshotFile = driver.getScreenshotAs(OutputType.FILE);
+        var fullImage = ImageIO.read(screenshotFile);
 
         // Get the location of element on the page
-        Point point = webElement.getLocation();
+        var point = webElement.getLocation();
 
         // Get width and height of the element
-        int webElementWidth = webElement.getSize().getWidth();
-        int webElementHeight = webElement.getSize().getHeight();
+        var webElementWidth = webElement.getSize().getWidth();
+        var webElementHeight = webElement.getSize().getHeight();
 
         // Crop the entire page screenshot to get only element screenshot
         // scrollYPos.intValue()
-        BufferedImage eleScreenshot = captureSubImage(fullImg, point, 0, webElementWidth, webElementHeight);
-        ImageIO.write(eleScreenshot, "png", screenshot);
+        var elementScreenshot = captureSubImage(fullImage, point, 0, webElementWidth, webElementHeight);
+        ImageIO.write(elementScreenshot, "png", screenshotFile);
 
         // Copy the element screenshot to disk
         File screenshotLocation;
@@ -118,7 +110,7 @@ public class FinvizScrapper {
             default:
                 throw new IllegalArgumentException("Unknown graph type!");
         }
-        FileUtils.copyFile(screenshot, screenshotLocation);
+        FileUtils.copyFile(screenshotFile, screenshotLocation);
     }
 
     private File createNewStockImageGraphFile(String stockTicker, String graphImageSuffix) {

@@ -4,10 +4,10 @@ public class Template {
 
     private static final String DIV_END = "</div>";
 
-    StringBuilder html;
+    final String date;
+    final StringBuilder html;
     String content;
-    String date;
-    
+
     public Template(final String date) {
         this.html = new StringBuilder();
         this.content = "";
@@ -95,7 +95,7 @@ public class Template {
      * Content will be placed between <body></body> tags in HTML.
      * @param content - HTML content
      */
-    public void setContent(final String content) {
+    public void addContent(final String content) {
         this.content = content;
     }
 
