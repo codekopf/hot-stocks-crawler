@@ -41,7 +41,9 @@ public class HotStocksCrawler {
 
     private static final String HTML_BR = "<br>";
     private static final String DIV_END = "</div>";
-    private static final String H2_TITLE_OWNED_STOCKS ="<h2>Owned stocks!</h2>";
+    private static final String H2_TITLE_PORTFOLIO_STOCKS = "<h2>Portfolio stocks!</h2>";
+    private static final String H2_TITLE_OWNED_STOCKS = "<h2>Owned stocks!</h2>";
+    private static final String H2_TITLE_SPECULATIVE_STOCKS = "<h2>Speculative stocks!</h2>";
     private static final String IMG_START_WITH_SOURCE = "<img src=\"img";
 
 
@@ -53,88 +55,154 @@ public class HotStocksCrawler {
         // Init WebDriver
         System.setProperty("webdriver.gecko.driver", "C:\\drivers\\geckodriver\\geckodriver.exe");
 
-        val ownedStocks = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\owned.csv")));
+        val portfolio = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\portfolio.csv")));
 
-        val speculativeStocks = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv")));
+        val owned = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\owned.csv")));
 
-        // TODO abuday - What if ownedStocks or speculativeStocks should be empty list or throw exception
+        val watchlist = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\watchlist.csv")));
+
+        // TODO abuday - What if ownedStocks or watchlist should be empty list or throw exception
         //  How to handle exception? What to do if there is empty list?
 
         StringBuilder content = new StringBuilder();
 
         content.append("<div class=\"tab-content\" id=\"nav-tabContent\">");
+
+
+
         // All
         content.append("<div class=\"tab-pane fade show active\" id=\"nav-all\" role=\"tabpanel\" aria-labelledby=\"nav-all-tab\">");
 
         content.append("<h1>All Stocks!</h1>");
 
-        content.append(H2_TITLE_OWNED_STOCKS);
-        for (val owned : ownedStocks) {
-            addStockTitleToContent(content, owned);
+        content.append(H2_TITLE_PORTFOLIO_STOCKS);
+
+        for (val stock : portfolio) {
+            addStockTitleToContent(content, stock);
         }
 
-        content.append("<h2>Speculative stocks!</h2>");
-        for (val speculative : speculativeStocks) {
+        content.append(H2_TITLE_OWNED_STOCKS);
+
+        for (val stock : owned) {
+            addStockTitleToContent(content, stock);
+        }
+
+        content.append(H2_TITLE_SPECULATIVE_STOCKS);
+
+        for (val speculative : watchlist) {
             addStockTitleToContent(content, speculative);
         }
 
         content.append(DIV_END);
 
+
+
+
+
         // Daily
         content.append("<div class=\"tab-pane fade\" id=\"nav-daily\" role=\"tabpanel\" aria-labelledby=\"nav-daily-tab\">");
 
         content.append("<h1>Daily</h1>");
-        content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (val owned : ownedStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(owned.getTicker()).append("-d.png").append("\">");
+        content.append(H2_TITLE_PORTFOLIO_STOCKS);
+
+        for (val stock : portfolio) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-d.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
-        content.append("<h2>Speculative stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (val speculative : speculativeStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculative.getTicker()).append("-d.png").append("\">");
+        for (val stock : owned) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-d.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
+        }
+
+        content.append(H2_TITLE_SPECULATIVE_STOCKS);
+
+        for (val stock : watchlist) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-d.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append(DIV_END);
+
+
+
+
 
         // Weekly
         content.append("<div class=\"tab-pane fade\" id=\"nav-weekly\" role=\"tabpanel\" aria-labelledby=\"nav-weekly-tab\">");
 
         content.append("<h1>Weekly</h1>");
-        content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (val owned : ownedStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(owned.getTicker()).append("-w.png").append("\">");
+        content.append(H2_TITLE_PORTFOLIO_STOCKS);
+
+        for (val stock : portfolio) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-w.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
-        content.append("<h2>Speculative stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (val speculative : speculativeStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculative.getTicker()).append("-w.png").append("\">");
+        for (val stock : owned) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-w.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
+        }
+
+        content.append(H2_TITLE_SPECULATIVE_STOCKS);
+
+        for (val stock : watchlist) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-w.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append(DIV_END);
 
+
+
+
         // Monthly
         content.append("<div class=\"tab-pane fade\" id=\"nav-monthly\" role=\"tabpanel\" aria-labelledby=\"nav-monthly-tab\">");
 
         content.append("<h1>Monthly</h1>");
-        content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (val owned : ownedStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(owned.getTicker()).append("-m.png").append("\">");
+        content.append(H2_TITLE_PORTFOLIO_STOCKS);
+
+        for (val stock : portfolio) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-m.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
-        content.append("<h2>Speculative stocks!</h2>");
+        content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (val speculative : speculativeStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculative.getTicker()).append("-m.png").append("\">");
+        for (val stock : owned) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-m.png").append("\">");
+            content.append(HTML_BR).append(HTML_BR);
+        }
+
+        content.append(H2_TITLE_SPECULATIVE_STOCKS);
+
+        for (val stock : watchlist) {
+            content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
+            content.append(HTML_BR);
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-m.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
@@ -204,8 +272,9 @@ public class HotStocksCrawler {
         // TODO measure time stats how fast the the crawler goes
 
         FinvizScrapper finvizScrapper = new FinvizScrapper(scrappingDate);
-        finvizScrapper.crawl(ownedStocks);
-        finvizScrapper.crawl(speculativeStocks);
+        finvizScrapper.crawl(portfolio);
+        finvizScrapper.crawl(owned);
+        finvizScrapper.crawl(watchlist);
     }
 
     private static List<Stock> parseStocks(String fileContent) {
@@ -220,7 +289,7 @@ public class HotStocksCrawler {
                     )
                 )
                 .sorted(Comparator.comparing(Stock::getName))
-                .toList();
+                .collect(Collectors.toList());
         } catch (IOException e) {
             // TODO abuday - empty catch block
         }

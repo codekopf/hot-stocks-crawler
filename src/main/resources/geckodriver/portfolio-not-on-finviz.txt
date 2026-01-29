@@ -1,0 +1,10 @@
+SCRAPPER; TICKER; NAME                              ; IMAGE                                                                      ; NOTE  ;
+  ; AIR     ; Airbus                       ; https://s3-symbol-logo.tradingview.com/airbus--big.svg     ; Degiro;
+  ; CEZ     ; CEZ                          ; https://s3-symbol-logo.tradingview.com/cez--big.svg        ; Degiro;
+  ; DNNGY   ; Orsted                       ; https://s3-symbol-logo.tradingview.com/orsted--big.svg     ; Trading212;
+  ; FWIA.DE ; Invesco UCITS FTSE All World ; https://s3-symbol-logo.tradingview.com/invesco--big.svg    ; Trading212;
+  ; LHA     ; Deutsche Lufthansa           ; https://s3-symbol-logo.tradingview.com/lufthansa--big.svg  ; Trading212;
+  ; RWE     ; RWE                          ; https://s3-symbol-logo.tradingview.com/rwe--big.svg        ; Degiro;
+  ; TUI     ; TUI                          ; https://s3-symbol-logo.tradingview.com/tui--big.svg        ; XTB;
+  ; UNA     ; Uniliver                     ; https://s3-symbol-logo.tradingview.com/unilever--big.svg   ; Degiro;
+  ; ZAL     ; Zalando                      ; https://s3-symbol-logo.tradingview.com/zalando--big.svg    ; Degiro;
