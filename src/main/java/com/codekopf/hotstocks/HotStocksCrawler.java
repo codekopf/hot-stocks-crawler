@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import com.codekopf.hotstocks.file.Template;
 import com.codekopf.hotstocks.model.CrawlingSource;
-import com.codekopf.hotstocks.model.StockTitle;
+import com.codekopf.hotstocks.model.Stock;
 import com.codekopf.hotstocks.service.FinvizScrapper;
 import lombok.val;
 import org.apache.commons.csv.CSVFormat;
@@ -32,11 +32,11 @@ public class HotStocksCrawler {
     private static final String IMAGE = "IMAGE";
     private static final String NOTE = "NOTE";
     private static final String[] HEADER = {
-            SCRAPER,
-            TICKER,
-            NAME,
-            IMAGE,
-            NOTE
+        SCRAPER,
+        TICKER,
+        NAME,
+        IMAGE,
+        NOTE
     };
 
     private static final String HTML_BR = "<br>";
@@ -53,17 +53,9 @@ public class HotStocksCrawler {
         // Init WebDriver
         System.setProperty("webdriver.gecko.driver", "C:\\drivers\\geckodriver\\geckodriver.exe");
 
-        val csvFileForOwnedStocks = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\owned.csv");
+        val ownedStocks = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\owned.csv")));
 
-        val fileContentOfOwnedStocks = FileUtils.readFileToString(csvFileForOwnedStocks);
-
-        val ownedStocks = parseStocks(fileContentOfOwnedStocks);
-
-        val csvFileForSpeculativeStocks = new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv");
-
-        val fileContentForSpeculativeStocks = FileUtils.readFileToString(csvFileForSpeculativeStocks);
-
-        val speculativeStocks = parseStocks(fileContentForSpeculativeStocks);
+        val speculativeStocks = parseStocks(FileUtils.readFileToString(new File("C:\\DEV\\hot-stocks-crawler\\src\\main\\resources\\speculative.csv")));
 
         // TODO abuday - What if ownedStocks or speculativeStocks should be empty list or throw exception
         //  How to handle exception? What to do if there is empty list?
@@ -77,13 +69,13 @@ public class HotStocksCrawler {
         content.append("<h1>All Stocks!</h1>");
 
         content.append(H2_TITLE_OWNED_STOCKS);
-        for (StockTitle ownedStock : ownedStocks) {
-            addStockTitleToContent(content, ownedStock);
+        for (val owned : ownedStocks) {
+            addStockTitleToContent(content, owned);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
-        for (StockTitle speculativeStock : speculativeStocks) {
-            addStockTitleToContent(content, speculativeStock);
+        for (val speculative : speculativeStocks) {
+            addStockTitleToContent(content, speculative);
         }
 
         content.append(DIV_END);
@@ -94,15 +86,15 @@ public class HotStocksCrawler {
         content.append("<h1>Daily</h1>");
         content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (StockTitle ownedStock : ownedStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(ownedStock.getTicker()).append("-d.png").append("\">");
+        for (val owned : ownedStocks) {
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(owned.getTicker()).append("-d.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
 
-        for (StockTitle speculativeStock : speculativeStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculativeStock.getTicker()).append("-d.png").append("\">");
+        for (val speculative : speculativeStocks) {
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculative.getTicker()).append("-d.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
@@ -114,15 +106,15 @@ public class HotStocksCrawler {
         content.append("<h1>Weekly</h1>");
         content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (StockTitle ownedStock : ownedStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(ownedStock.getTicker()).append("-w.png").append("\">");
+        for (val owned : ownedStocks) {
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(owned.getTicker()).append("-w.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
 
-        for (StockTitle speculativeStock : speculativeStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculativeStock.getTicker()).append("-w.png").append("\">");
+        for (val speculative : speculativeStocks) {
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculative.getTicker()).append("-w.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
@@ -134,15 +126,15 @@ public class HotStocksCrawler {
         content.append("<h1>Monthly</h1>");
         content.append(H2_TITLE_OWNED_STOCKS);
 
-        for (StockTitle ownedStock : ownedStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(ownedStock.getTicker()).append("-m.png").append("\">");
+        for (val owned : ownedStocks) {
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(owned.getTicker()).append("-m.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
         content.append("<h2>Speculative stocks!</h2>");
 
-        for (StockTitle speculativeStock : speculativeStocks) {
-            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculativeStock.getTicker()).append("-m.png").append("\">");
+        for (val speculative : speculativeStocks) {
+            content.append(IMG_START_WITH_SOURCE).append("\\").append(speculative.getTicker()).append("-m.png").append("\">");
             content.append(HTML_BR).append(HTML_BR);
         }
 
@@ -216,33 +208,33 @@ public class HotStocksCrawler {
         finvizScrapper.crawl(speculativeStocks);
     }
 
-    private static List<StockTitle> parseStocks(String fileContent) {
-        try (CSVParser csvParser = new CSVParser(new StringReader(fileContent), CSVFormat.DEFAULT.withDelimiter(SEMICOLON).withHeader(HEADER).withSkipHeaderRecord())) {
+    private static List<Stock> parseStocks(String fileContent) {
+        try (val csvParser = new CSVParser(new StringReader(fileContent), CSVFormat.DEFAULT.withDelimiter(SEMICOLON).withHeader(HEADER).withSkipHeaderRecord())) {
             return csvParser.getRecords()
-                    .stream()
-                    .map(csvRecord -> StockTitle.of(
-                            CrawlingSource.valueOf(csvRecord.get(SCRAPER).trim()),
-                            csvRecord.get(TICKER).trim(),
-                            csvRecord.get(NAME).trim(),
-                            csvRecord.get(IMAGE).trim()
-                            )
+                .stream()
+                .map(csvRecord -> Stock.of(
+                    CrawlingSource.valueOf(csvRecord.get(SCRAPER).trim()),
+                    csvRecord.get(TICKER).trim(),
+                    csvRecord.get(NAME).trim(),
+                    csvRecord.get(IMAGE).trim()
                     )
-                    .sorted(Comparator.comparing(StockTitle::getName))
-                    .collect(Collectors.toList());
+                )
+                .sorted(Comparator.comparing(Stock::getName))
+                .toList();
         } catch (IOException e) {
             // TODO abuday - empty catch block
         }
         return Collections.emptyList();
     }
 
-    private static void addStockTitleToContent(StringBuilder content, StockTitle stockTitle) {
-        content.append("<img src=\"").append(stockTitle.getImage()).append("\">").append(stockTitle.getName());
+    private static void addStockTitleToContent(final StringBuilder content, final Stock stock) {
+        content.append("<img src=\"").append(stock.getImage()).append("\">").append(stock.getName());
         content.append(HTML_BR);
-        content.append(IMG_START_WITH_SOURCE).append("\\").append(stockTitle.getTicker()).append("-d.png").append("\">");
+        content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-d.png").append("\">");
         content.append(HTML_BR).append(HTML_BR);
-        content.append(IMG_START_WITH_SOURCE).append("\\").append(stockTitle.getTicker()).append("-w.png").append("\">");
+        content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-w.png").append("\">");
         content.append(HTML_BR).append(HTML_BR);
-        content.append(IMG_START_WITH_SOURCE).append("\\").append(stockTitle.getTicker()).append("-m.png").append("\">");
+        content.append(IMG_START_WITH_SOURCE).append("\\").append(stock.getTicker()).append("-m.png").append("\">");
         content.append(HTML_BR).append(HTML_BR);
     }
 

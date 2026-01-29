@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import lombok.val;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -18,7 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.codekopf.hotstocks.HotStocksCrawler;
-import com.codekopf.hotstocks.model.StockTitle;
+import com.codekopf.hotstocks.model.Stock;
 
 public class FinvizScrapper {
 
@@ -31,7 +32,7 @@ public class FinvizScrapper {
         this.scrappingDate = scrappingDate;
     }
 
-    public void crawl(List<StockTitle> stockTitles) {
+    public void crawl(final List<Stock> stocks) {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("-width=1920");
         options.addArguments("-height=1080");
@@ -50,9 +51,9 @@ public class FinvizScrapper {
         driver.executeScript("return arguments[0].remove();", menu);
 
         try {
-            for (StockTitle stockTitle : stockTitles) {
+            for (val stock : stocks) {
                 try {
-                    String stockTicker = stockTitle.getTicker();
+                    String stockTicker = stock.getTicker();
                     driver.get("https://finviz.com/quote.ashx?t=" + stockTicker + "&ty=c&ta=1&p=d&tas=0");
                     getGraph(driver, wait, stockTicker, GraphType.DAILY);
                     driver.get("https://finviz.com/quote.ashx?t=" + stockTicker + "&ty=c&ta=1&p=w&tas=0");
@@ -60,7 +61,7 @@ public class FinvizScrapper {
                     driver.get("https://finviz.com/quote.ashx?t=" + stockTicker + "&ty=c&ta=1&p=m&tas=0");
                     getGraph(driver, wait, stockTicker, GraphType.MONTHLY);
                 } catch (Throwable t) {
-                    System.out.println("Error while crawling " + stockTitle.getTicker() + ": " + t.getMessage());
+                    System.out.println("Error while crawling " + stock.getTicker() + ": " + t.getMessage());
                 }
             }
         } finally {
