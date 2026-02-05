@@ -68,7 +68,7 @@ public class Template {
         this.html.append("<button class=\"nav-link active\" id=\"nav-all-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-all\" type=\"button\" role=\"tab\" aria-controls=\"nav-all\" aria-selected=\"true\">All</button>");
         this.html.append("<button class=\"nav-link\" id=\"nav-daily-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-daily\" type=\"button\" role=\"tab\" aria-controls=\"nav-daily\" aria-selected=\"false\">Daily</button>");
         this.html.append("<button class=\"nav-link\" id=\"nav-weekly-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-weekly\" type=\"button\" role=\"tab\" aria-controls=\"nav-weekly\" aria-selected=\"false\">Weekly</button>");
-        this.html.append("<button class=\"nav-link\" id=\"nav-weekly-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-monthly\" type=\"button\" role=\"tab\" aria-controls=\"nav-monthly\" aria-selected=\"false\">Monthly</button>");
+        this.html.append("<button class=\"nav-link\" id=\"nav-monthly-tab\" data-bs-toggle=\"tab\" data-bs-target=\"#nav-monthly\" type=\"button\" role=\"tab\" aria-controls=\"nav-monthly\" aria-selected=\"false\">Monthly</button>");
         this.html.append(DIV_END);
         this.html.append("</nav>");
         this.html.append(DIV_END);
